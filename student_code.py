@@ -23,12 +23,14 @@ class KnowledgeBase(object):
         Args:
             fact (Fact or Rule): Fact or Rule we're asserting in the format produced by read.py
         """
-        if isinstance(fact, Fact):
+        if not isinstance(fact, Fact):
+            print("Assertion Failed: input not a Fact")
+        elif fact in self.facts:
+            print("Assertion Failed: input fact already exist")
+        else:
             print("Asserting {!r}".format(fact))
             self.facts.append(fact)
-        else:
-            print("Assertion Failed: input not a Fact")
-        
+
     def kb_ask(self, fact):
         """Ask if a fact is in the KB
 
